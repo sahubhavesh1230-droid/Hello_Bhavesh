@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Modern enterprise landing page built with semantic HTML and CSS." />
+  <title>Apex Technologies — Next-Gen Software Solutions</title>
+  <style>
+    /* ============================================================
+       1. CSS CUSTOM PROPERTIES (DESIGN TOKENS)
+       ============================================================ */
+    :root {
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --accent: #38bdf8;
+      --bg-body: #0b0f19;
+      --bg-surface: #111827;
+      --bg-surface-elevated: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: rgba(255, 255, 255, 0.08);
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --container-max: 1200px;
+      --transition: 0.25s ease-in-out;
+    }
+
+    /* ============================================================
+       2. RESET & BASE STYLES
+       ============================================================ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: color var(--transition);
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(100% - 3rem, var(--container-max));
+      margin-inline: auto;
+    }
+
+    /* ============================================================
+       3. NAVIGATION BAR
+       ============================================================ */
+    .header {
+      position: sticky;
+      top: 0;
+      background: rgba(11, 15, 25, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      z-index: 1000;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 72px;
+    }
+
+    .brand {
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .brand-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--primary);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--primary);
+    }
+
+    .nav-list {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .nav-link {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .nav-link:hover {
+      color: var(--text-main);
+    }
+
+    /* ============================================================
+       4. BUTTONS & UI COMPONENTS
+       ============================================================ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.7rem 1.4rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all var(--transition);
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border-color: var(--border-color);
+      color: var(--text-main);
+    }
+
+    .btn-outline:hover {
+      background: var(--bg-surface-elevated);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.35rem 0.85rem;
+      background: rgba(37, 99, 235, 0.1);
+      border: 1px solid rgba(37, 99, 235, 0.3);
+      color: var(--accent);
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ============================================================
+       5. HERO SECTION
+       ============================================================ */
+    .hero {
+      padding: 6rem 0 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin-inline: auto;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -1.5px;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, #60a5fa 0%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* ============================================================
+       6. METRICS SECTION
+       ============================================================ */
+    .stats-bar {
+      margin-top: 5rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+    }
+
+    .stat-card {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .stat-label {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
+    /* ============================================================
+       7. FEATURES SECTION
+       ============================================================ */
+    .features {
+      padding: 6rem 0;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 600px;
+      margin-inline: auto;
+      margin-bottom: 3.5rem;
+    }
+
+    .section-header h2 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-header p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      padding: 2rem;
+      border-radius: var(--radius-md);
+      transition: transform var(--transition), border-color var(--transition);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(37, 99, 235, 0.4);
+    }
+
+    .feature-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--bg-surface-elevated);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+      font-size: 1.25rem;
+      border: 1px solid var(--border-color);
+    }
+
+    .feature-card h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* ============================================================
+       8. FOOTER
+       ============================================================ */
+    .footer {
+      border-top: 1px solid var(--border-color);
+      padding: 3rem 0;
+      background: var(--bg-surface);
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .footer-copy {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* ============================================================
+       9. RESPONSIVE BREAKPOINTS
+       ============================================================ */
+    @media (max-width: 768px) {
+      .nav-list {
+        display: none; /* Can be paired with a simple hamburger drawer */
+      }
+      .hero {
+        padding: 4rem 0 2rem;
+      }
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <header class="header">
+    <div class="container nav">
+      <a href="#" class="brand">
+        <span class="brand-dot"></span>
+        ApexUI
+      </a>
+      <ul class="nav-list">
+        <li><a href="#features" class="nav-link">Features</a></li>
+        <li><a href="#solutions" class="nav-link">Solutions</a></li>
+        <li><a href="#pricing" class="nav-link">Pricing</a></li>
+        <li><a href="#company" class="nav-link">Company</a></li>
+      </ul>
+      <div>
+        <a href="#get-started" class="btn btn-primary">Get Started</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container hero-content">
+        <div class="badge">Engineered for High-Scale Applications</div>
+        <h1>Build Faster with <span>Modern Architecture</span></h1>
+        <p class="hero-subtitle">
+          An enterprise-ready foundation for software engineering teams. Eliminate boilerplate, maintain clean architecture, and deploy with confidence.
+        </p>
+        <div class="hero-actions">
+          <a href="#get-started" class="btn btn-primary">Start Building Free</a>
+          <a href="#docs" class="btn btn-outline">Read Documentation &rarr;</a>
+        </div>
+
+        <!-- Live Metrics Bar -->
+        <div class="stats-bar">
+          <div class="stat-card">
+            <div class="stat-number">99.99%</div>
+            <div class="stat-label">SLA Uptime</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">&lt; 15ms</div>
+            <div class="stat-label">Global Latency</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">10M+</div>
+            <div class="stat-label">Daily API Requests</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">Zero</div>
+            <div class="stat-label">Runtime Dependencies</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Core Features Section -->
+    <section id="features" class="features">
+      <div class="container">
+        <div class="section-header">
+          <h2>Production-grade Capabilities</h2>
+          <p>Everything required to engineer stable, resilient, and responsive modern applications.</p>
+        </div>
+
+        <div class="features-grid">
+          <article class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>Microsecond Latency</h3>
+            <p>Designed from the ground up for instantaneous queries, minimal memory footprints, and extreme execution velocity.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">🛡️</div>
+            <h3>End-to-End Security</h3>
+            <p>Role-based access controls, automatic encryption in transit and at rest, and regular pen-test compliance validation.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">⚙️</div>
+            <h3>Automated Scalability</h3>
+            <p>Dynamic thread management and stateless application layer designed to scale with your user workloads.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <p class="footer-copy">&copy; 2026 ApexUI Technologies. All rights reserved.</p>
+      <div style="display: flex; gap: 1.5rem;">
+        <a href="#" class="nav-link">Privacy Policy</a>
+        <a href="#" class="nav-link">Terms of Service</a>
+        <a href="#" class="nav-link">Status</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
